@@ -11,7 +11,7 @@ def get_data_from_external_api(api_url):
 
 
 class PlanetsDataCollector:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.planets_raw_data = None
         self.solar_data = get_data_from_external_api(SOLAR_API_URL)
         self.filter_all_planet_data()
@@ -53,7 +53,7 @@ class PlanetsDataCollector:
             mass = planet['mass']['massValue'] * math.pow(10, planet['mass']['massExponent'])
             return mass
         except IndexError as e:
-            print(str(e))
+            pass
         return None
 
     def process_one_planet_data(self, planet_specific_data):
@@ -76,6 +76,9 @@ class PlanetsDataCollector:
             ans_list.append(self.process_one_planet_data(p_data))
         self.final_data = ans_list
         return ans_list
+
+    def output_data(self):
+        return self.process_all_planet_data()
 
 
 if __name__ == '__main__':
