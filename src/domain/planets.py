@@ -90,4 +90,4 @@ if __name__ == '__main__':
     print(detailed_moon_data)
     print(p_data.sort_planet_moons_data_by_mass(uranus_data))
     print(p_data.process_one_planet_data(uranus_data))
-    print(len(p_data.process_all_planet_data()))
+    print(p_data.process_all_planet_data())
