@@ -1,7 +1,6 @@
 import csv
 from src.domain.planets import PlanetsDataCollector
 from src.domain.asteroids import AsteroidDataCollector
-import os
 
 solar_data_type_choices = ['planet', 'asteroid']
 

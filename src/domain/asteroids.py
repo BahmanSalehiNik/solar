@@ -1,11 +1,6 @@
 import math
 from src.conf import SOLAR_API_URL
-import requests
 from src.entry_point.external_api_calls import get_data_from_external_api
-
-# def get_data_from_external_api(api_url):
-#     response = requests.get(api_url)
-#     return response.json()
 
 
 class AsteroidDataCollector:
