@@ -15,6 +15,7 @@ class PlanetsDataCollector:
     def filter_all_planet_data(self):
         all_planet_data = [item for item in self.solar_data['bodies'] if item.get("isPlanet")]
         self.planets_raw_data = all_planet_data
+        return all_planet_data
 
     @staticmethod
     def planet_specific_moons(planet_specific_data):

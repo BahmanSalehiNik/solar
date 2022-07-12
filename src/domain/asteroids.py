@@ -50,7 +50,7 @@ class AsteroidDataCollector:
 if __name__ == '__main__':
 
     a_data = AsteroidDataCollector('Vénus')
-    print(a_data.asteroid_raw_data)
+    print(len(a_data.asteroid_raw_data))
     print(a_data.get_planet_to_compare_data())
     print(len(a_data.filter_asteroids_bigger_than_planet()))
     print(a_data.output_data())

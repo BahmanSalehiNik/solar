@@ -17,3 +17,24 @@ class TestPlanetDataCollector(TestCase):
         uranus_second_small_moon = self.planets_obj.calculate_planet_moon_by_position(uranus_sorted_moon_data, 1)
         self.assertEqual(uranus_second_small_moon, 3.9 * math.pow(10, 15))
 
+    def test_filter_all_planet_data(self):
+        filtered_data = self.planets_obj.filter_all_planet_data()
+        for d in filtered_data:
+            self.assertEqual(d['isPlanet'], True)
+
+    def test_planet_specific_moons(self):
+        planet_data = self.planets_obj.planets_raw_data[0]
+        moons_data =self.planets_obj.planet_specific_moons(planet_data)
+        for d in moons_data:
+            self.assertIsNotNone(d['moon'])
+
+    def test_valid_filter_moon_data(self):
+        moon_data = self.planets_obj.filter_moon_data('Ariel')
+        self.assertIsNotNone(moon_data)
+        self.assertEqual(moon_data['name'], 'Ariel')
+
+    def test_invalid_filter_moon_data(self):
+        with self.assertRaises(KeyError):
+            moon_data = self.planets_obj.filter_moon_data('earth')
+            self.assertIsNotNone(moon_data)
+
