@@ -43,7 +43,7 @@ class PlanetsDataCollector:
         return sorted_moon_data
 
     @staticmethod
-    def calculate_planet_moon_by_position(planet_sorted_moon_data, position):
+    def calculate_planet_moon_mass_by_position(planet_sorted_moon_data, position):
         try:
             planet = planet_sorted_moon_data[position]
             mass = planet['mass']['massValue'] * math.pow(10, planet['mass']['massExponent'])
@@ -57,9 +57,9 @@ class PlanetsDataCollector:
         polar_radius = planet_specific_data['polarRadius'] * KILOMETER_TO_MILE_CONSTANT
         sorted_moon_data = self.sort_planet_moons_data_by_mass(planet_specific_data)
 
-        smallest_moon_mass = self.calculate_planet_moon_by_position(sorted_moon_data, 0)
-        biggest_moon_mass = self.calculate_planet_moon_by_position(sorted_moon_data, -1)
-        second_smallest_moon_mass = self.calculate_planet_moon_by_position(sorted_moon_data, 1)
+        smallest_moon_mass = self.calculate_planet_moon_mass_by_position(sorted_moon_data, 0)
+        biggest_moon_mass = self.calculate_planet_moon_mass_by_position(sorted_moon_data, -1)
+        second_smallest_moon_mass = self.calculate_planet_moon_mass_by_position(sorted_moon_data, 1)
 
         data = {'name': planet_name, 'polarRadius': polar_radius,'smallest moon mass': smallest_moon_mass,
                 'second smallest moon mass': second_smallest_moon_mass,
