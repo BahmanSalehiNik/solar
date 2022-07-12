@@ -11,4 +11,4 @@ api = Api(app)
 api.add_resource(SolarResource, '/solar/<string:solar_type>')
 
 if __name__ == '__main__':
-    app.run(host='http://127.0.0.1', port=4000)
+    app.run(host='0.0.0.0', port=4000)
