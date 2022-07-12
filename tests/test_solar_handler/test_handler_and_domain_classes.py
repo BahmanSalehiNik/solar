@@ -12,4 +12,3 @@ class TestHandlerWithPlanet(TestCase):
     def test_handler_returns_correct_type_with_asteroid_input(self):
         obj = handle_solar_data('asteroid')
         self.assertEqual(obj, AsteroidDataCollector)
-        

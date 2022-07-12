@@ -1,6 +1,7 @@
 from unittest import TestCase
 from src.domain.solar_handler import write_list_of_dicts_to_csv
 import csv
+import os
 
 
 class TestWriteToCsv(TestCase):
