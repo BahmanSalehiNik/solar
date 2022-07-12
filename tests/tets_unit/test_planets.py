@@ -45,3 +45,11 @@ class TestPlanetDataCollector(TestCase):
         for d in planet_moon_data:
             self.assertIsInstance(d, dict)
             self.assertIn('id', d.keys())
+
+    def test_sort_planet_data_by_mass(self):
+        planet_data = self.planets_obj.planets_raw_data[0]
+        sorted_data = self.planets_obj.sort_planet_moons_data_by_mass(planet_data)
+        l = [dict(item, **{'massInKg': item['mass']['massValue']
+                                                          * math.pow(10, item['mass']['massExponent'])})
+                                for item in sorted_data]
+        self.assertTrue(all(l[i]['massInKg'] <= l[i+1]['massInKg'] for i in range(len(l)-1)))
