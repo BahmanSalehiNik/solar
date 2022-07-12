@@ -1,15 +1,11 @@
 import math
-
+from src.conf import SOLAR_API_URL
 import requests
+from src.entry_point.external_api_calls import get_data_from_external_api
 
-
-SOLAR_API_URL = 'https://api.le-systeme-solaire.net/rest/bodies'
-KILOMETER_TO_MILE_CONSTANT = 0.621371
-
-
-def get_data_from_external_api(api_url):
-    response = requests.get(api_url)
-    return response.json()
+# def get_data_from_external_api(api_url):
+#     response = requests.get(api_url)
+#     return response.json()
 
 
 class AsteroidDataCollector:
@@ -34,16 +30,17 @@ class AsteroidDataCollector:
     def calculate_planet_mass(self):
         planet_data = self.get_planet_to_compare_data()
         if planet_data:
-
-            mass = planet_data['mass']['massValue'] * math.pow(10, planet_data['mass']['massValue'])
+            mass = planet_data['mass']['massValue'] * math.pow(10, planet_data['mass']['massExponent'])
             return mass
         return None
 
     def filter_asteroids_bigger_than_planet(self):
         mass = self.calculate_planet_mass()
         dropped_none_mass_asteroids_list = [a for a in self.asteroid_raw_data if a['mass']]
-        asteroids_list = [a for a in dropped_none_mass_asteroids_list if
-                          a['mass']['massValue'] * math.pow(10, a['mass']['massValue']) > mass]
+        converted_mass_asteroids = [dict(item, **{'massInKg':item['mass']['massValue']
+                                                              * math.pow(10, item['mass']['massExponent'])})
+                                    for item in dropped_none_mass_asteroids_list]
+        asteroids_list = [a for a in converted_mass_asteroids if a['massInKg']> mass]
         return asteroids_list
 
     def output_data(self):
@@ -56,3 +53,4 @@ if __name__ == '__main__':
     print(a_data.asteroid_raw_data)
     print(a_data.get_planet_to_compare_data())
     print(len(a_data.filter_asteroids_bigger_than_planet()))
+    print(a_data.output_data())

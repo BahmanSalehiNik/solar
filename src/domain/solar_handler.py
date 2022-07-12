@@ -20,11 +20,15 @@ solar_data_handler = {
 
 
 def write_list_of_dicts_to_csv(input_data, output_file_name):
-    if len(input_data) > 0:
+    if input_data is not None:
         with open(output_file_name, 'w+') as output_file:
-            dict_writer = csv.DictWriter(output_file, input_data[0].keys())
-            dict_writer.writeheader()
-            dict_writer.writerows(input_data)
+            if len(input_data) > 0:
+                dict_writer = csv.DictWriter(output_file, input_data[0].keys())
+                dict_writer.writeheader()
+                dict_writer.writerows(input_data)
+            else:
+                writer = csv.writer(output_file)
+                writer.writerow(input_data)
 
 
 if __name__ == '__main__':

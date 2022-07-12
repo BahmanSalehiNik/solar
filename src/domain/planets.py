@@ -1,13 +1,8 @@
 import requests
 import math
+from src.conf import SOLAR_API_URL, KILOMETER_TO_MILE_CONSTANT
+from src.entry_point.external_api_calls import get_data_from_external_api
 
-SOLAR_API_URL = 'https://api.le-systeme-solaire.net/rest/bodies'
-KILOMETER_TO_MILE_CONSTANT = 0.621371
-
-
-def get_data_from_external_api(api_url):
-    response = requests.get(api_url)
-    return response.json()
 
 
 class PlanetsDataCollector:
@@ -85,6 +80,7 @@ if __name__ == '__main__':
     url = SOLAR_API_URL
     p_data = PlanetsDataCollector()
     planet_data = p_data.planets_raw_data
+    print(planet_data)
     uranus_data = planet_data[0]
     print(uranus_data['moons'])
     uranus_moons_data = p_data.planet_specific_moons(uranus_data)
