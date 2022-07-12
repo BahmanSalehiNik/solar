@@ -85,3 +85,6 @@ class TestPlanetDataCollector(TestCase):
         data = self.planets_obj.output_data()
         processed_data = self.planets_obj.process_all_planet_data()
         self.assertEqual(data, processed_data)
+
+    def tearDown(self) -> None:
+        self.planets_obj = None
