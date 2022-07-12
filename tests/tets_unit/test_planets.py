@@ -38,3 +38,10 @@ class TestPlanetDataCollector(TestCase):
             moon_data = self.planets_obj.filter_moon_data('earth')
             self.assertIsNotNone(moon_data)
 
+    def test_extract_planet_moons_data(self):
+        planet_data = self.planets_obj.planets_raw_data[0]
+        planet_moon_data = self.planets_obj.extract_planet_moons_data(planet_data)
+        self.assertIsNotNone(planet_moon_data)
+        for d in planet_moon_data:
+            self.assertIsInstance(d, dict)
+            self.assertIn('id', d.keys())
