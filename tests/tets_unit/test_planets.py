@@ -64,3 +64,24 @@ class TestPlanetDataCollector(TestCase):
         self.assertIsNotNone(mass)
         self.assertIsInstance(mass, float)
         self.assertEqual(mass, 3.8 * math.pow(10, 15))
+
+    def test_process_one_planet_data(self):
+        planet_data = self.planets_obj.planets_raw_data[0]
+        data = self.planets_obj.process_one_planet_data(planet_data)
+        self.assertIsNotNone(data)
+        keys_to_check = ['name', 'polarRadius', 'smallest moon mass',
+                     'second smallest moon mass', 'biggest moon mass']
+        for d in keys_to_check:
+            self.assertIn(d, data.keys())
+
+    def test_process_all_planet_data(self):
+        data = self.planets_obj.process_all_planet_data()
+        self.assertIsNotNone(data)
+        self.assertIsInstance(data, list)
+        self.assertIsInstance(data[0], dict)
+        self.assertGreater(len(data), 2)
+
+    def test_output_data(self):
+        data = self.planets_obj.output_data()
+        processed_data = self.planets_obj.process_all_planet_data()
+        self.assertEqual(data, processed_data)
